@@ -1,0 +1,14 @@
+cc = gcc
+prom = calc
+deps = $(shell find ./ -name "*.h")
+src = $(shell find ./ -name "*.c")
+obj = $(src:%.c=%.o) 
+flags = -Wall
+$(prom): $(obj)
+	$(cc) $(flags) -o $(prom) $(obj)
+
+%.o: %.c $(deps)
+	$(cc) $(flags)  -c $< -o $@
+.PHONY: clean
+clean:
+	rm -rf $(obj) $(prom)
